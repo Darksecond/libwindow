@@ -9,3 +9,4 @@ TODO
 * add multiple opengl version support
 * add monitor enumeration
 * add resolution enumeration
+* add width() and height()
