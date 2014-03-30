@@ -26,23 +26,23 @@ int main() {
 
     window::init();
 
-    window::window::key_event::sink sink(&a, 2);
+    window::key_event::sink sink(&a, 2);
     win.bind(&sink);
     sink.add_listener<&key_callback>();
     sink.add_listener<window::keyboard, &window::keyboard::on_event>(&kb);
 
     win.open(800, 600);
-    while(!win.should_close() && !kb.is_pressed(window::keyboard::key::escape)) {
+    while(!win.should_close() && !kb.is_pressed(window::key::escape)) {
         kb.begin_frame();
         window::begin_frame();
 
-        if(kb.went_up(window::keyboard::key::s))
+        if(kb.went_up(window::key::s))
             printf("went up\n");
-        if(kb.went_down(window::keyboard::key::s))
+        if(kb.went_down(window::key::s))
             printf("went down\n");
-        if(kb.is_repeating(window::keyboard::key::s))
+        if(kb.is_repeating(window::key::s))
             printf("repeating\n");
-        if(kb.is_pressed(window::keyboard::key::s))
+        if(kb.is_pressed(window::key::s))
             printf("pressed\n");
 
         win.end_frame();

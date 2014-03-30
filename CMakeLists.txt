@@ -18,9 +18,10 @@ add_library (window
 	include/window/window.h
 	include/window/opengl.h
 	include/window/keyboard.h
-	src/window/internal.h
+	include/window/key.h
 	src/window/window.cc
 	src/window/keyboard.cc
+	src/window/key.cc
 	${PLATFORM_FILES}
 	)
 

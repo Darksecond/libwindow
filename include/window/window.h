@@ -15,12 +15,12 @@ namespace window
      */
     void begin_frame();
 
+    typedef core::event<void (int,int,int,int)> key_event;
+
     class window
     {
         GLFWwindow* _window;
     public:
-        typedef core::event<void (int,int,int,int)> key_event;
-
         window();
 
         void open(const int width, const int height);
