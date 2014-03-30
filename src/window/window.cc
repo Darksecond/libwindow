@@ -1,11 +1,21 @@
 #include <window/window.h>
 #include <window/opengl.h>
 
+#include <core/logging/log.h>
+
 #include <cstdlib>
 #include <cassert>
-#include <cstdio> //TODO replace with libcore logger
 
-static GLFWwindow* _window = nullptr;
+window::window::window() : _window(nullptr)
+{
+}
+
+void window::window::key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+    window::window* win = reinterpret_cast<window::window*>(glfwGetWindowUserPointer(window));
+    if(win->_key_event.is_bound())
+        win->_key_event.signal(key,scancode,action,mods);
+}
 
 void window::init()
 {
@@ -20,7 +30,44 @@ void window::exit()
     glfwTerminate();
 }
 
-void window::open(const int width, const int height)
+void window::begin_frame()
+{
+    glfwPollEvents();
+}
+
+void window::window::bind(key_event::sink* sink)
+{
+    _key_event.bind(sink);
+}
+
+void window::window::end_frame()
+{
+    assert(_window);
+    glfwSwapBuffers(_window);
+}
+
+void window::window::set_title(const char* title)
+{
+    assert(_window);
+    glfwSetWindowTitle(_window, title);
+}
+
+bool window::window::should_close()
+{
+    assert(_window);
+    return glfwWindowShouldClose(_window);
+}
+
+void window::window::close()
+{
+    if(_window)
+    {
+        glfwDestroyWindow(_window);
+    }
+    _window = nullptr;
+}
+
+void window::window::open(const int width, const int height)
 {
     assert(_window == nullptr);
 
@@ -35,6 +82,10 @@ void window::open(const int width, const int height)
         glfwTerminate();
         ::exit(EXIT_FAILURE);
     }
+
+    glfwSetWindowUserPointer(_window, this);
+    glfwSetKeyCallback(_window, &key_callback);
+
     glfwMakeContextCurrent(_window);
 
     glewExperimental = GL_TRUE;
@@ -51,34 +102,8 @@ void window::open(const int width, const int height)
         ::exit(EXIT_FAILURE);
     }
 
-    //TODO use libcore logger
-    printf("OpenGL Version: %s\n", glGetString(GL_VERSION));
-    printf("GLSL Version: %s\n", glGetString(GL_SHADING_LANGUAGE_VERSION));
-    printf("Vendor: %s\n", glGetString(GL_VENDOR));
-    printf("Renderer: %s\n", glGetString(GL_RENDERER));
-}
-
-void window::close()
-{
-    if(_window)
-    {
-        glfwDestroyWindow(_window);
-    }
-    _window = nullptr;
-}
-
-void window::set_title(const char* title) {
-    assert(_window);
-    glfwSetWindowTitle(_window, title);
-}
-
-void window::swap() {
-    assert(_window);
-    glfwSwapBuffers(_window);
-    glfwPollEvents();
-}
-
-bool window::should_close() {
-    assert(_window);
-    return glfwWindowShouldClose(_window);
+    CORE_LINFO("system", "OpenGL Version: %s", glGetString(GL_VERSION));
+    CORE_LINFO("system", "GLSL Version: %s", glGetString(GL_SHADING_LANGUAGE_VERSION));
+    CORE_LINFO("system", "Vendor: %s", glGetString(GL_VENDOR));
+    CORE_LINFO("system", "Renderer: %s", glGetString(GL_RENDERER));
 }

@@ -17,7 +17,10 @@ endif ()
 add_library (window 
 	include/window/window.h
 	include/window/opengl.h
+	include/window/keyboard.h
+	src/window/internal.h
 	src/window/window.cc
+	src/window/keyboard.cc
 	${PLATFORM_FILES}
 	)
 
@@ -35,5 +38,18 @@ if (NOT APPLE)
 endif ()
 target_link_libraries (window ${OPENGL_LIBRARIES})
 
+find_package (Core REQUIRED)
+include_directories (${CORE_INCLUDE_DIRS})
+target_link_libraries (window ${CORE_LIBRARIES})
+
 add_executable (window_sample sample/window/window_sample.cc)
 target_link_libraries (window_sample window)
+
+install (TARGETS window
+	ARCHIVE DESTINATION lib
+	)
+
+install (DIRECTORY include/
+	DESTINATION include
+	FILES_MATCHING PATTERN "*.h"
+	)
