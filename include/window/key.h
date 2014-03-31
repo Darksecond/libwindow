@@ -130,4 +130,5 @@ namespace window
 
     int key_to_glfw(key key);
     key glfw_to_key(int key);
+    const char* key_name(key key);
 }

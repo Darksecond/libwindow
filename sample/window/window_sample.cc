@@ -11,7 +11,7 @@
 
 void key_callback(int key, int scancode, int action, int mods)
 {
-    printf("callback: K:%c(%i) A:%i\n", key, key, action);
+    printf("callback: K:%c(%i)(%s) A:%i\n", key, key, window::key_name(window::glfw_to_key(key)), action);
 }
 
 
