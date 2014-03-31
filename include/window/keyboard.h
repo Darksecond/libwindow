@@ -13,12 +13,12 @@ namespace window
             bool went_down;
             bool repeat;
         };
-        
-        key_state _keys[(int)key::last];
+
+        key_state _keys[static_cast<int>(key::last)];
     public:
         keyboard();
 
-        void on_event(int,int,int,int);
+        void on_event(key key, bool pressed, bool repeat);
 
         /**
          * Clears certain internal buffers.
@@ -28,22 +28,22 @@ namespace window
 
         inline bool is_pressed(key key)
         {
-            return _keys[(int)key].pressed;
+            return _keys[static_cast<int>(key)].pressed;
         }
 
         inline bool went_up(key key)
         {
-            return _keys[(int)key].went_up;
+            return _keys[static_cast<int>(key)].went_up;
         }
 
         inline bool went_down(key key)
         {
-            return _keys[(int)key].went_down;
+            return _keys[static_cast<int>(key)].went_down;
         }
 
         inline bool is_repeating(key key)
         {
-            return _keys[(int)key].repeat;
+            return _keys[static_cast<int>(key)].repeat;
         }
     };
 }

@@ -1,5 +1,6 @@
 #pragma once
 
+#include <window/key.h>
 #include <core/util/event.h>
 
 struct GLFWwindow;
@@ -15,7 +16,7 @@ namespace window
      */
     void begin_frame();
 
-    typedef core::event<void (int,int,int,int)> key_event;
+    typedef core::event<void (key,bool,bool)> key_event;
 
     class window
     {

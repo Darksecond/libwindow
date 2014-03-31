@@ -9,11 +9,10 @@
 #include <core/memory/system_allocator.h>
 #include <core/logging/console_logger.h>
 
-void key_callback(int key, int scancode, int action, int mods)
+void key_callback(window::key key, bool pressed, bool repeat)
 {
-    printf("callback: K:%c(%i)(%s) A:%i\n", key, key, window::key_name(window::glfw_to_key(key)), action);
+    printf("callback: K:%i(%s) P:%i R:%i\n",key,window::key_name(key),pressed,repeat);
 }
-
 
 int main() {
     core::system_allocator alloc;

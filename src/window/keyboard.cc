@@ -3,30 +3,18 @@
 
 #include <cstring>
 
-void window::keyboard::on_event(int glfw_key, int, int action, int)
+void window::keyboard::on_event(key k, bool pressed, bool repeat)
 {
-    key k = glfw_to_key(glfw_key);
     if(k == key::unknown) return; //safety check
 
-    key_state& state = _keys[(int)k];
+    key_state& state = _keys[static_cast<int>(k)];
 
-    if(action == GLFW_RELEASE)
-    {
-        if(state.pressed)
-            state.went_up = true;
-        state.pressed = false;
-        state.repeat = false;
-    }
-    else if(action == GLFW_PRESS)
-    {
-        if(!state.pressed)
-            state.went_down = true;
-        state.pressed = true;
-    }
-    else if(action == GLFW_REPEAT)
-    {
-        state.repeat = true;
-    }
+    if(pressed && !state.pressed)
+        state.went_down = true;
+    else if(!pressed && state.pressed)
+        state.went_up = true;
+    state.repeat = repeat;
+    state.pressed = pressed;
 }
 
 void window::keyboard::begin_frame()

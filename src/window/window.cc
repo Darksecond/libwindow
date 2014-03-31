@@ -10,11 +10,12 @@ window::window::window() : _window(nullptr)
 {
 }
 
-void window::window::key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+void window::window::key_callback(GLFWwindow* window, int glfw_key, int scancode, int action, int mods)
 {
     window::window* win = reinterpret_cast<window::window*>(glfwGetWindowUserPointer(window));
+    key k = glfw_to_key(glfw_key);
     if(win->_key_event.is_bound())
-        win->_key_event.signal(key,scancode,action,mods);
+        win->_key_event.signal(k, (action != GLFW_RELEASE), (action == GLFW_REPEAT));
 }
 
 void window::init()
