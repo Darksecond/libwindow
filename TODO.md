@@ -20,4 +20,3 @@ TODO
 * add code comments
 * add coding style documentation
 * class Joystick
-* add install commands to cmakelists
