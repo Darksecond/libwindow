@@ -1,6 +1,7 @@
 TODO
 ====
 
+* hide/disable mouse cursor
 * class Mouse
 * improve window::open
 * improve window -> borderless, resizeable
@@ -20,3 +21,4 @@ TODO
 * add code comments
 * add coding style documentation
 * class Joystick
+* add double-click support

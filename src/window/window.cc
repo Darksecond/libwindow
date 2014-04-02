@@ -10,10 +10,40 @@ window::window::window() : _window(nullptr)
 {
 }
 
+void window::window::button_callback(GLFWwindow* window, int glfw_button, int action, int mods)
+{
+    window::window* win = reinterpret_cast<window::window*>(glfwGetWindowUserPointer(window));
+    assert(win);
+
+    const button b = glfw_to_button(glfw_button);
+    if(win->_button_event.is_bound())
+        win->_button_event.signal(b, (action == GLFW_PRESS));
+}
+
+void window::window::cursor_callback(GLFWwindow* window, double xpos, double ypos)
+{
+    window::window* win = reinterpret_cast<window::window*>(glfwGetWindowUserPointer(window));
+    assert(win);
+
+    if(win->_cursor_event.is_bound())
+        win->_cursor_event.signal(xpos, ypos);
+}
+
+void window::window::scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
+{
+    window::window* win = reinterpret_cast<window::window*>(glfwGetWindowUserPointer(window));
+    assert(win);
+
+    if(win->_scroll_event.is_bound())
+        win->_scroll_event.signal(xoffset, yoffset);
+}
+
 void window::window::key_callback(GLFWwindow* window, int glfw_key, int scancode, int action, int mods)
 {
     window::window* win = reinterpret_cast<window::window*>(glfwGetWindowUserPointer(window));
-    key k = glfw_to_key(glfw_key);
+    assert(win);
+
+    const key k = glfw_to_key(glfw_key);
     if(win->_key_event.is_bound())
         win->_key_event.signal(k, (action != GLFW_RELEASE), (action == GLFW_REPEAT));
 }
@@ -39,6 +69,21 @@ void window::begin_frame()
 void window::window::bind(key_event::sink* sink)
 {
     _key_event.bind(sink);
+}
+
+void window::window::bind(scroll_event::sink* sink)
+{
+    _scroll_event.bind(sink);
+}
+
+void window::window::bind(cursor_event::sink* sink)
+{
+    _cursor_event.bind(sink);
+}
+
+void window::window::bind(button_event::sink* sink)
+{
+    _button_event.bind(sink);
 }
 
 void window::window::end_frame()
@@ -86,6 +131,9 @@ void window::window::open(const int width, const int height)
 
     glfwSetWindowUserPointer(_window, this);
     glfwSetKeyCallback(_window, &key_callback);
+    glfwSetScrollCallback(_window, &scroll_callback);
+    glfwSetCursorPosCallback(_window, &cursor_callback);
+    glfwSetMouseButtonCallback(_window, &button_callback);
 
     glfwMakeContextCurrent(_window);
 
