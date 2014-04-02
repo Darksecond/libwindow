@@ -21,3 +21,4 @@ TODO
 * add coding style documentation
 * class Joystick
 * add double-click support
+* call close() on window destruct, make sure we do not destruct it after window::exit
