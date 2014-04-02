@@ -71,6 +71,18 @@ namespace window
         void bind(scroll_event::sink* sink);
         void bind(cursor_event::sink* sink);
         void bind(button_event::sink* sink);
+
+        /**
+         * Enable or disable the mouse cursor.
+         * \param visible true if the cursor should be enabled/visible.
+         */
+        void set_cursor(const bool visible);
+        
+        /**
+         * Get the current visibility state of the mouse cursor.
+         * \returns true if visible
+         */
+        bool get_cursor() const;
     private:
         static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
         static void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);

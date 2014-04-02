@@ -156,3 +156,17 @@ void window::window::open(const int width, const int height)
     CORE_LINFO("system", "Vendor: %s", glGetString(GL_VENDOR));
     CORE_LINFO("system", "Renderer: %s", glGetString(GL_RENDERER));
 }
+
+void window::window::set_cursor(const bool visible)
+{
+    assert(_window);
+
+    glfwSetInputMode(_window, GLFW_CURSOR, visible ? GLFW_CURSOR_NORMAL : GLFW_CURSOR_DISABLED);
+}
+
+bool window::window::get_cursor() const
+{
+    assert(_window);
+
+    return glfwGetInputMode(_window, GLFW_CURSOR) == GLFW_CURSOR_NORMAL;
+}

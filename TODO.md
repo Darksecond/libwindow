@@ -1,7 +1,6 @@
 TODO
 ====
 
-* hide/disable mouse cursor
 * class Mouse
 * improve window::open
 * improve window -> borderless, resizeable
