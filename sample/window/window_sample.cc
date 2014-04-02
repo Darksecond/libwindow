@@ -33,7 +33,7 @@ int main() {
     win.open(800, 600);
     while(!win.should_close() && !kb.is_pressed(window::key::escape)) {
         kb.begin_frame();
-        window::begin_frame();
+        window::pump_events();
 
         if(kb.went_up(window::key::s))
             printf("went up\n");
@@ -44,7 +44,7 @@ int main() {
         if(kb.is_pressed(window::key::s))
             printf("pressed\n");
 
-        win.end_frame();
+        win.swap();
     }
     win.close();
     window::exit();

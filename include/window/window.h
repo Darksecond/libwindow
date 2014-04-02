@@ -15,7 +15,7 @@ namespace window
      * Starts the current frame, performs the built-in message pump
      * Input event callbacks will be called during this call.
      */
-    void begin_frame();
+    void pump_events();
 
     /**
      * Key event, a key has been pressed, released or repeated.
@@ -63,9 +63,9 @@ namespace window
         void set_title(const char* title);
 
         /**
-         * Ends the current frame, swaps the display buffers.
+         * Swap buffers
          */
-        void end_frame();
+        void swap();
 
         void bind(key_event::sink* sink);
         void bind(scroll_event::sink* sink);

@@ -21,6 +21,3 @@ TODO
 * add coding style documentation
 * class Joystick
 * add double-click support
-
-* rename startFrame to pump_events
-* rename endFrame to swap

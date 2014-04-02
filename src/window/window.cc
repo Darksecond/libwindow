@@ -61,7 +61,7 @@ void window::exit()
     glfwTerminate();
 }
 
-void window::begin_frame()
+void window::pump_events()
 {
     glfwPollEvents();
 }
@@ -86,7 +86,7 @@ void window::window::bind(button_event::sink* sink)
     _button_event.bind(sink);
 }
 
-void window::window::end_frame()
+void window::window::swap()
 {
     assert(_window);
     glfwSwapBuffers(_window);
