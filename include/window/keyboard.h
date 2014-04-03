@@ -26,24 +26,33 @@ namespace window
          */
         void begin_frame();
 
-        inline bool is_pressed(key key)
+        inline bool is_pressed(key key) const
         {
             return _keys[static_cast<int>(key)].pressed;
         }
 
-        inline bool went_up(key key)
+        inline bool went_up(key key) const
         {
             return _keys[static_cast<int>(key)].went_up;
         }
 
-        inline bool went_down(key key)
+        inline bool went_down(key key) const
         {
             return _keys[static_cast<int>(key)].went_down;
         }
 
-        inline bool is_repeating(key key)
+        inline bool is_repeating(key key) const
         {
             return _keys[static_cast<int>(key)].repeat;
         }
+
+        /**
+         * \returns the key that was pressed, returns key::unknown if none was pressed
+         */
+        key any_is_pressed() const;
+
+        key any_went_up() const;
+        key any_went_down() const;
+        key any_is_repeating() const;
     };
 }

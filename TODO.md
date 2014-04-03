@@ -10,7 +10,6 @@ TODO
 * add monitor enumeration
 * add resolution enumeration
 * add width() and height() or size()
-* keyboard::any_key series of methods
 * do not allow window::open() before window::init()
 * class Monitor
 * devices folder
