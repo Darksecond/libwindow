@@ -15,17 +15,20 @@ if (APPLE)
 endif ()
 
 add_library (window 
-	include/window/window.h
-	include/window/opengl.h
-	include/window/keyboard.h
-	include/window/key.h
+    include/window/window.h
+    include/window/opengl.h
+    include/window/keyboard.h
+    include/window/key.h
     include/window/button.h
-	src/window/window.cc
-	src/window/keyboard.cc
-	src/window/key.cc
+    include/window/mouse.h
+    include/window/point.h
+    src/window/window.cc
+    src/window/keyboard.cc
+    src/window/key.cc
     src/window/button.cc
-	${PLATFORM_FILES}
-	)
+    src/window/mouse.cc
+    ${PLATFORM_FILES}
+    )
 
 find_package (GLEW REQUIRED)
 include_directories (${GLEW_INCLUDE_DIRS})
