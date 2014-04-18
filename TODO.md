@@ -20,5 +20,4 @@ TODO
 * class Joystick
 * add double-click support
 * call close() on window destruct, make sure we do not destruct it after window::exit
-* move point<T> to libcore?
 * any series of commands for mouse
