@@ -2,6 +2,7 @@ TODO
 ====
 
 * improve window::open
+* window::set_opengl_version
 * improve window -> borderless, resizeable
 * add support for SDL2
 * add resize support
@@ -18,6 +19,5 @@ TODO
 * add code comments
 * add coding style documentation
 * class Joystick
-* add double-click support
-* call close() on window destruct, make sure we do not destruct it after window::exit
-* any series of commands for mouse
+* add double-click support (or not; this might be a libinput feature)
+* any series of commands for mouse (buttons)
