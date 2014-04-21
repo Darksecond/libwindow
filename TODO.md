@@ -13,7 +13,6 @@ TODO
 * do not allow window::open() before window::init()
 * class Monitor
 * devices folder
-* activate window/make window current
 * add README
 * add doxygen
 * add code comments
