@@ -21,3 +21,4 @@ TODO
 * class Joystick
 * add double-click support (or not; this might be a libinput feature)
 * any series of commands for mouse (buttons)
+* allow window::set_title before window::open
