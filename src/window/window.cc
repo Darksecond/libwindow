@@ -135,7 +135,7 @@ void window::window::open(const int width, const int height)
     glfwSetCursorPosCallback(_window, &cursor_callback);
     glfwSetMouseButtonCallback(_window, &button_callback);
 
-    glfwMakeContextCurrent(_window);
+    activate();
 
     glewExperimental = GL_TRUE;
     if(glewInit() != GLEW_OK)
@@ -169,4 +169,11 @@ bool window::window::get_cursor() const
     assert(_window);
 
     return glfwGetInputMode(_window, GLFW_CURSOR) == GLFW_CURSOR_NORMAL;
+}
+
+void window::window::activate() const
+{
+    assert(_window);
+
+    glfwMakeContextCurrent(_window);
 }

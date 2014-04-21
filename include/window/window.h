@@ -83,6 +83,11 @@ namespace window
          * \returns true if visible
          */
         bool get_cursor() const;
+
+	/**
+	 * Make this window the current OpenGL context.
+	 */
+	void activate() const;
     private:
         static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
         static void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
