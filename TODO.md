@@ -22,3 +22,7 @@ TODO
 * any series of commands for mouse (buttons)
 * allow window::set_title before window::open
 * window -> AA settings
+* debug context ( glfwWindowHint( GLFW_OPENGL_DEBUG_CONTEXT, true ); )
+  http://renderingpipeline.com/2013/09/opengl-debugging-with-khr_debug/
+  http://renderingpipeline.com/2013/09/simulating-khr_debug-on-macos-x/
+  https://www.opengl.org/registry/specs/KHR/debug.txt
